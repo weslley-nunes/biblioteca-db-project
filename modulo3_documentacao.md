@@ -451,3 +451,134 @@ O repositório completo do projeto, incluindo o modelo de dados, scripts SQL, ex
 
 Este repositório serve como a entrega final do módulo 3, demonstrando a aplicação dos conceitos de modelagem de banco de dados e controle de versão.
 
+
+## 7. Resultados Preliminares: Solução Inicial
+
+Esta seção apresenta os primeiros resultados obtidos com a implementação do banco de dados e o gerenciamento do código-fonte, demonstrando a funcionalidade básica do sistema e a aplicação das práticas de controle de versão.
+
+### 7.1 Implementação do Banco de Dados
+
+A solução inicial do banco de dados foi implementada com sucesso utilizando SQLite, conforme o esquema definido na seção de modelagem. O processo de criação das tabelas e a inserção de dados de exemplo foram validados através da execução de scripts SQL dedicados.
+
+#### 7.1.1 Criação do Esquema
+
+O script `schema.sql` foi executado para criar as tabelas `Usuario`, `Vaga`, `Curso`, `CandidaturaVaga` e `InscricaoCurso` no banco de dados `portal_oportunidades.db`. A execução bem-sucedida deste script confirmou a correta definição das entidades, atributos, chaves primárias e estrangeiras, e outras restrições de integridade.
+
+#### 7.1.2 Inserção e Consulta de Dados de Usuário
+
+Para demonstrar a manipulação de dados, foram inseridos exemplos de usuários na tabela `Usuario` utilizando o script `insert_user_data.sql`. Posteriormente, consultas SQL foram realizadas para verificar a integridade e a recuperação dos dados. Abaixo, um exemplo da saída de uma consulta `SELECT` que demonstra os usuários inseridos:
+
+```
+sqlite> SELECT id_usuario, nome_completo, email, tipo_usuario, data_cadastro FROM Usuario;
+1|Maria da Silva|maria.silva@email.com|Candidato|2025-06-20 15:13:46
+2|João Oliveira|joao.oliveira@empresaabc.com|Empresa|2025-06-20 15:13:46
+3|Carla Souza|carla.souza@institutoedu.com|Instituicao|2025-06-20 15:13:46
+```
+
+Este resultado valida a capacidade do sistema de armazenar e recuperar informações de usuários de forma eficaz. Outras operações CRUD (Update e Delete) também foram testadas com sucesso, garantindo a manipulação completa dos registros de usuários.
+
+#### 7.1.3 Diagrama do Banco de Dados Implementado
+
+O diagrama Entidade-Relacionamento (DER) conceitual, que representa a estrutura do banco de dados implementado, é apresentado novamente para facilitar a visualização da solução inicial:
+
+```mermaid
+erDiagram
+    Usuario ||--o{ CandidaturaVaga : "candidata-se"
+    Vaga ||--o{ CandidaturaVaga : "recebe"
+    Usuario ||--o{ InscricaoCurso : "inscreve-se"
+    Curso ||--o{ InscricaoCurso : "recebe"
+
+    Usuario {
+        integer id_usuario PK
+        varchar nome_completo
+        varchar email UK
+        varchar senha_hash
+        varchar telefone
+        date data_nascimento
+        varchar endereco
+        varchar cidade
+        varchar estado
+        datetime data_cadastro
+        datetime ultimo_login
+        varchar tipo_usuario
+    }
+
+    Vaga {
+        integer id_vaga PK
+        varchar titulo
+        text descricao
+        varchar empresa
+        varchar localizacao
+        varchar salario
+        varchar tipo_contrato
+        datetime data_publicacao
+        datetime data_expiracao
+        varchar contato_email
+    }
+
+    Curso {
+        integer id_curso PK
+        varchar titulo
+        text descricao
+        varchar instituicao
+        varchar modalidade
+        varchar duracao
+        varchar link_inscricao
+        date data_inicio
+        date data_fim
+        varchar contato_email
+    }
+
+    CandidaturaVaga {
+        integer id_candidatura PK
+        integer id_usuario FK
+        integer id_vaga FK
+        datetime data_candidatura
+        varchar status_candidatura
+    }
+
+    InscricaoCurso {
+        integer id_inscricao PK
+        integer id_usuario FK
+        integer id_curso FK
+        datetime data_inscricao
+        varchar status_inscricao
+    }
+```
+
+### 7.2 Gerenciamento do Código com Git e GitHub
+
+O controle de versão foi aplicado de forma contínua durante o desenvolvimento, garantindo um histórico completo das alterações e a organização do projeto. O repositório no GitHub reflete a evolução do banco de dados e da documentação.
+
+#### 7.2.1 Histórico de Commits
+
+O histórico de commits no GitHub demonstra as etapas de desenvolvimento, desde a inicialização do repositório até as atualizações mais recentes. Cada commit possui uma mensagem explicativa, facilitando o rastreamento das modificações. Exemplos de commits relevantes incluem:
+
+*   `Initial commit: Database schema and CRUD scripts for Library Management System.`
+*   `Update database model for Portal de Oportunidades, add user entity and example data.`
+*   `Update Module 3 documentation with Portal de Oportunidades data model.`
+*   `Add Methodology section to Module 3 documentation.`
+*   `Add Preliminary Results section to Module 3 documentation.`
+
+Este histórico pode ser visualizado diretamente no repositório do GitHub, fornecendo uma visão transparente do processo de desenvolvimento.
+
+#### 7.2.2 Estrutura do Repositório
+
+A estrutura do repositório no GitHub está organizada para facilitar o acesso aos arquivos do projeto:
+
+```
+db_project/
+├── portal_oportunidades.db
+├── schema.sql
+├── insert_user_data.sql
+├── user_crud_examples.sql
+├── modulo3_documentacao.md
+└── ... (outros arquivos de configuração e scripts)
+```
+
+O repositório está disponível publicamente em: [https://github.com/weslley-nunes/biblioteca-db-project](https://github.com/weslley-nunes/biblioteca-db-project).
+
+### 7.3 Conclusão dos Resultados Preliminares
+
+Os resultados preliminares demonstram que o banco de dados foi modelado e implementado com sucesso, e que as operações básicas de manipulação de dados estão funcionando conforme o esperado. O uso do Git e GitHub garantiu um gerenciamento eficaz do código, com um histórico de versões claro e acessível. Esta solução inicial serve como uma base sólida para futuras expansões e integrações com a aplicação web do Portal de Oportunidades Gratuitas.
+

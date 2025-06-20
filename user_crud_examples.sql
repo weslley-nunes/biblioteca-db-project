@@ -4,7 +4,7 @@ SELECT id_usuario, nome_completo, email, tipo_usuario, data_cadastro FROM Usuari
 -- Consultar um usuário específico pelo email
 SELECT * FROM Usuario WHERE email = 'maria.silva@email.com';
 
--- Atualizar o telefone de um usuário
+-- Atualizar o telefone de um usuário 2 
 UPDATE Usuario SET telefone = '63991112233' WHERE email = 'maria.silva@email.com';
 
 -- Remover um usuário

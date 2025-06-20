@@ -1,7 +1,7 @@
-# Módulo 3: Modelagem de Banco de Dados e Controle de Versão para o Portal de Oportunidades Gratuitas
+# Módulo 3: Modelagem de Banco de Dados e Controle de Versão para o Portal de Oportunidades Gratuitas.
 
-**Autor:** Manus AI  
-**Data:** 20 de junho de 2025  
+**Autor:** Weslley Nunes 
+**Data:** 10 de junho de 2025  
 
 ---
 

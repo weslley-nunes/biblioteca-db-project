@@ -1,4 +1,4 @@
--- Criação da tabela Usuario
+-- Criação da tabela Usuario.
 CREATE TABLE Usuario (
     id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
     nome_completo VARCHAR(255) NOT NULL,

@@ -1,4 +1,4 @@
--- Inserir um Usuário de Exemplo (Candidato)
+-- Inserir um Usuário de Exemplo (Candidato).
 INSERT INTO Usuario (
     nome_completo, 
     email, 

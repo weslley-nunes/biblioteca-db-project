@@ -311,3 +311,143 @@ INSERT INTO Usuario (
 ---
 
 
+
+
+## 6. Metodologia
+
+O desenvolvimento deste projeto seguiu uma abordagem estruturada, dividida em etapas claras para garantir a correta modelagem do banco de dados, a implementação eficiente e o gerenciamento robusto do código-fonte utilizando controle de versão. Cada fase foi executada com atenção às boas práticas e aos requisitos estabelecidos.
+
+### 6.1 Modelagem do Banco de Dados
+
+A fase de modelagem do banco de dados foi crucial para estabelecer a estrutura lógica e física das informações que seriam armazenadas no Portal de Oportunidades Gratuitas. O processo envolveu a identificação e definição das entidades, seus atributos e os relacionamentos entre elas.
+
+#### 6.1.1 Definição das Entidades, Atributos e Relacionamentos
+
+Com base nos requisitos do Portal de Oportunidades Gratuitas, foram identificadas as seguintes entidades principais:
+
+*   **Usuario**: Representa os indivíduos ou organizações que interagem com o portal. Inclui atributos como `id_usuario` (chave primária), `nome_completo`, `email` (único), `senha_hash`, `telefone`, `data_nascimento`, `endereco`, `cidade`, `estado`, `data_cadastro`, `ultimo_login` e `tipo_usuario` (indicando se é um candidato, empresa ou instituição).
+*   **Vaga**: Representa as oportunidades de emprego. Atributos incluem `id_vaga` (chave primária), `titulo`, `descricao`, `empresa`, `localizacao`, `salario`, `tipo_contrato`, `data_publicacao`, `data_expiracao` e `contato_email`.
+*   **Curso**: Representa os cursos de capacitação. Atributos como `id_curso` (chave primária), `titulo`, `descricao`, `instituicao`, `modalidade`, `duracao`, `link_inscricao`, `data_inicio`, `data_fim` e `contato_email`.
+*   **CandidaturaVaga**: Uma entidade associativa que registra a candidatura de um `Usuario` a uma `Vaga`. Contém `id_candidatura` (chave primária), `id_usuario` (chave estrangeira), `id_vaga` (chave estrangeira), `data_candidatura` e `status_candidatura`.
+*   **InscricaoCurso**: Uma entidade associativa que registra a inscrição de um `Usuario` em um `Curso`. Contém `id_inscricao` (chave primária), `id_usuario` (chave estrangeira), `id_curso` (chave estrangeira), `data_inscricao` e `status_inscricao`.
+
+Os relacionamentos foram definidos como:
+
+*   Um `Usuario` pode realizar múltiplas `CandidaturaVaga`s (1:N).
+*   Uma `Vaga` pode receber múltiplas `CandidaturaVaga`s (1:N).
+*   Um `Usuario` pode realizar múltiplas `InscricaoCurso`s (1:N).
+*   Um `Curso` pode receber múltiplas `InscricaoCurso`s (1:N).
+
+#### 6.1.2 Apresentação do Diagrama do Banco de Dados
+
+O diagrama Entidade-Relacionamento (DER) conceitual, utilizando a notação Mermaid, foi gerado para visualizar a estrutura do banco de dados e os relacionamentos entre as entidades. Este diagrama serve como uma representação clara do modelo de dados, facilitando a compreensão e a comunicação da arquitetura do banco de dados.
+
+```mermaid
+erDiagram
+    Usuario ||--o{ CandidaturaVaga : "candidata-se"
+    Vaga ||--o{ CandidaturaVaga : "recebe"
+    Usuario ||--o{ InscricaoCurso : "inscreve-se"
+    Curso ||--o{ InscricaoCurso : "recebe"
+
+    Usuario {
+        integer id_usuario PK
+        varchar nome_completo
+        varchar email UK
+        varchar senha_hash
+        varchar telefone
+        date data_nascimento
+        varchar endereco
+        varchar cidade
+        varchar estado
+        datetime data_cadastro
+        datetime ultimo_login
+        varchar tipo_usuario
+    }
+
+    Vaga {
+        integer id_vaga PK
+        varchar titulo
+        text descricao
+        varchar empresa
+        varchar localizacao
+        varchar salario
+        varchar tipo_contrato
+        datetime data_publicacao
+        datetime data_expiracao
+        varchar contato_email
+    }
+
+    Curso {
+        integer id_curso PK
+        varchar titulo
+        text descricao
+        varchar instituicao
+        varchar modalidade
+        varchar duracao
+        varchar link_inscricao
+        date data_inicio
+        date data_fim
+        varchar contato_email
+    }
+
+    CandidaturaVaga {
+        integer id_candidatura PK
+        integer id_usuario FK
+        integer id_vaga FK
+        datetime data_candidatura
+        varchar status_candidatura
+    }
+
+    InscricaoCurso {
+        integer id_inscricao PK
+        integer id_usuario FK
+        integer id_curso FK
+        datetime data_inscricao
+        varchar status_inscricao
+    }
+```
+
+### 6.2 Implementação e Manipulação de Dados
+
+Após a definição do modelo, a próxima etapa foi a implementação do esquema do banco de dados e a demonstração das operações de manipulação de dados utilizando SQL.
+
+#### 6.2.1 Criação das Tabelas e Restrições
+
+O banco de dados SQLite foi escolhido para a implementação devido à sua leveza e facilidade de uso para projetos de demonstração. O script `schema.sql` foi criado para definir todas as tabelas (`Usuario`, `Vaga`, `Curso`, `CandidaturaVaga`, `InscricaoCurso`) com suas respectivas colunas, tipos de dados, chaves primárias (`PRIMARY KEY AUTOINCREMENT`) e restrições de não nulidade (`NOT NULL`). As chaves estrangeiras (`FOREIGN KEY`) foram estabelecidas para garantir a integridade referencial entre as tabelas, como o `id_usuario` e `id_vaga` na tabela `CandidaturaVaga`.
+
+#### 6.2.2 Inserção de Dados e Realização de Consultas SQL
+
+Para demonstrar a manipulação de dados, foram criados scripts SQL específicos:
+
+*   **Inserção de Dados**: O script `insert_user_data.sql` foi utilizado para popular a tabela `Usuario` com exemplos de dados, incluindo diferentes tipos de usuários (candidato, empresa, instituição). Isso validou a capacidade de adicionar novos registros ao banco de dados.
+*   **Operações CRUD (Create, Read, Update, Delete)**: O script `user_crud_examples.sql` foi desenvolvido para ilustrar as operações básicas de manipulação de dados na tabela `Usuario`. Isso incluiu:
+    *   **CREATE**: Exemplos de `INSERT` para adicionar novos usuários.
+    *   **READ**: Consultas `SELECT` para recuperar dados de usuários, incluindo a seleção de todos os usuários e a busca por um usuário específico via email.
+    *   **UPDATE**: Comandos `UPDATE` para modificar informações existentes de um usuário, como o número de telefone.
+    *   **DELETE**: Comandos `DELETE` para remover registros de usuários do banco de dados.
+
+Esses scripts foram executados utilizando o interpretador `sqlite3`, confirmando a funcionalidade das operações de banco de dados.
+
+### 6.3 Uso do Controle de Versão
+
+O sistema de controle de versão Git foi empregado desde o início do projeto para gerenciar a evolução do código e da documentação, garantindo rastreabilidade e colaboração (mesmo que neste contexto a colaboração seja simulada).
+
+#### 6.3.1 Configuração e Organização do Repositório Git
+
+O repositório Git foi inicializado no diretório do projeto (`db_project`) utilizando o comando `git init`. As configurações de usuário (`user.name` e `user.email`) foram definidas globalmente para identificar os commits. O arquivo `.gitignore` foi criado para excluir arquivos desnecessários do controle de versão, como o arquivo do banco de dados SQLite (`portal_oportunidades.db`) e outros arquivos temporários ou de configuração do ambiente.
+
+#### 6.3.2 Estratégias Utilizadas no Versionamento
+
+*   **Commits Frequentes**: Foram realizados commits regulares com mensagens claras e explicativas, descrevendo as alterações feitas em cada etapa. Isso permitiu um histórico detalhado do desenvolvimento e facilitou a identificação de mudanças específicas.
+    *   Exemplos de mensagens de commit: `"Initial commit: Database schema and CRUD scripts for Library Management System."`, `"Update database model for Portal de Oportunidades, add user entity and example data."`, `"Update Module 3 documentation with Portal de Oportunidades data model."`, etc.
+*   **Branching (Master/Main)**: O desenvolvimento foi mantido na branch principal (`master`, que foi renomeada para `main` no GitHub por padrão), simulando um fluxo de trabalho linear para este projeto de escopo limitado. Em projetos maiores, branches de feature seriam utilizadas para isolar o desenvolvimento de novas funcionalidades.
+*   **Sincronização com o GitHub**: Após os commits locais, o repositório local foi conectado a um repositório remoto no GitHub. O comando `git push -u origin master` (ou `main`) foi utilizado para enviar as alterações para o repositório remoto, mantendo o histórico de versões online e acessível.
+
+#### 6.3.3 Link para o Repositório do Projeto
+
+O repositório completo do projeto, incluindo o modelo de dados, scripts SQL, exemplos de manipulação de dados e a documentação, está disponível publicamente no GitHub:
+
+**Link do Repositório:** [https://github.com/weslley-nunes/biblioteca-db-project](https://github.com/weslley-nunes/biblioteca-db-project)
+
+Este repositório serve como a entrega final do módulo 3, demonstrando a aplicação dos conceitos de modelagem de banco de dados e controle de versão.
+

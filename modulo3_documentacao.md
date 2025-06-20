@@ -582,3 +582,42 @@ O repositório está disponível publicamente em: [https://github.com/weslley-nu
 
 Os resultados preliminares demonstram que o banco de dados foi modelado e implementado com sucesso, e que as operações básicas de manipulação de dados estão funcionando conforme o esperado. O uso do Git e GitHub garantiu um gerenciamento eficaz do código, com um histórico de versões claro e acessível. Esta solução inicial serve como uma base sólida para futuras expansões e integrações com a aplicação web do Portal de Oportunidades Gratuitas.
 
+
+
+## 8. Descrição dos Requisitos
+
+Os requisitos para o projeto "Portal de Oportunidades Gratuitas: Cursos e Empregos em Gurupi - TO" foram definidos e refinados de forma iterativa, principalmente através da interação direta com o usuário e da análise de suas solicitações e feedback ao longo das fases de desenvolvimento. Diferentemente de um processo tradicional que inicia com um documento de requisitos formal e abrangente, a abordagem adotada neste projeto simulou um cenário de desenvolvimento ágil e colaborativo, onde os requisitos emergiram e foram detalhados conforme a evolução da aplicação.
+
+### 8.1 Formato e Escrita dos Requisitos
+
+Os requisitos foram expressos predominantemente em **linguagem natural**, por meio das instruções e solicitações fornecidas pelo usuário. Essas solicitações eram diretas e focadas nas funcionalidades desejadas para o portal, como a necessidade de uma aplicação web dinâmica e responsiva, a inclusão de funcionalidades para vagas de emprego e cursos, e a integração com banco de dados e controle de versão.
+
+Exemplos de como os requisitos foram implicitamente definidos:
+
+*   **Requisito Funcional (Aplicação Web)**: "Você deverá desenvolver uma aplicação web dinâmica, aplicando o artefatos que foram desenvolvidos em etapas anteriores. O projeto deve contemplar: Uso de um framework para plataforma web... Estruturação correta das páginas com HTML... Estilização responsiva com CSS..." (Conforme solicitação inicial do Módulo 1).
+*   **Requisito Não Funcional (Responsividade)**: "Vamos focar em plataforma web, mas que seja responsivo." (Conforme solicitação inicial do Módulo 1).
+*   **Requisito Funcional (Banco de Dados)**: "Criar um modelo de dados para um sistema, definindo entidades, relacionamentos e restrições; Implementar o esquema do banco de dados utilizando SQL; Executar operações de manipulação de dados (inserção, atualização, remoção e consultas)." (Conforme solicitação do Módulo 3).
+*   **Requisito de Dados (Usuário)**: "Crie apenas um exemplo de dados que serão armazenados do usuário." (Conforme solicitação específica para o banco de dados).
+
+Embora não tenham sido formalizadas como estórias de usuário no formato padrão (e.g., "Como um [tipo de usuário], eu quero [funcionalidade], para que [benefício]"), as interações com o usuário permitiram inferir as necessidades e expectativas de cada persona (candidato, empresa, instituição).
+
+### 8.2 Validação dos Requisitos
+
+A validação dos requisitos ocorreu de forma contínua e empírica, através de um ciclo de feedback e refinamento:
+
+1.  **Implementação Iterativa**: Cada solicitação do usuário era interpretada e implementada em fases incrementais do projeto (e.g., desenvolvimento da aplicação web, depois a conversão para HTML/CSS puro, e em seguida a implementação do banco de dados).
+2.  **Demonstração e Feedback**: Após cada entrega de uma funcionalidade ou artefato (como a aplicação web beta, o projeto HTML/CSS, ou o repositório do banco de dados), o resultado era apresentado ao usuário. O feedback direto do usuário ("POde fazer mais simples, preciso mais da parte visual como um exemplo. As funcionalidades não precisam ser todas operacionais. trabalhe com um versão beta" ou "sim") serviu como principal mecanismo de validação, indicando se a implementação atendia à expectativa ou se necessitava de ajustes.
+3.  **Ajustes e Refinamentos**: Com base no feedback, os requisitos eram ajustados e novas iterações de desenvolvimento eram iniciadas. Por exemplo, a solicitação para simplificar a aplicação web para uma versão beta mais visual levou a uma reestruturação do frontend. Da mesma forma, a solicitação para focar o banco de dados no Portal de Oportunidades e em dados de usuário levou à redefinição do modelo de dados.
+4.  **Inspeção de Artefatos**: A tarefa atual de inspeção de artefatos (Módulo 4) representa uma validação formal e sistemática dos requisitos e visões arquiteturais, buscando identificar defeitos e inconsistências que possam ter surgido durante o processo de desenvolvimento iterativo.
+
+### 8.3 Acesso aos Documentos de Requisitos e Projeto
+
+Os requisitos e as visões arquiteturais do projeto estão incorporados e documentados nos seguintes artefatos, que servem como a base para a inspeção:
+
+*   **Documentação do Projeto Web (HTML/CSS/JS)**: Contém as decisões de design, estrutura e responsividade da interface do usuário.
+    *   **Link de Acesso**: O código-fonte e a documentação estão disponíveis no arquivo compactado `portal-html-completo.tar.gz` e na documentação `documentacao-projeto.md` (disponibilizados em interações anteriores).
+*   **Documentação do Projeto de Banco de Dados (SQL/SQLite)**: Detalha o modelo de dados, o esquema do banco de dados, e os exemplos de manipulação de dados, incluindo a entidade `Usuario`.
+    *   **Link de Acesso**: O código-fonte e a documentação estão disponíveis no repositório GitHub: [https://github.com/weslley-nunes/biblioteca-db-project](https://github.com/weslley-nunes/biblioteca-db-project). A documentação específica está no arquivo `modulo3_documentacao.md` dentro deste repositório.
+
+Estes documentos, juntamente com o histórico de interações e solicitações do usuário, formam o corpo de requisitos e o projeto da aplicação a serem inspecionados.
+
